@@ -26,7 +26,7 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.REGION }}
 
-    - name: 🏗️ Setup cloudformation deployment for {{ env.STACK_NAME_VPC }}
+    - name: 🏗️ Setup cloudformation deployment for Networking
       run: |
         aws cloudformation deploy \
             --stack-name ${{env.STACK_NAME_VPC}} \
@@ -35,7 +35,7 @@ jobs:
             --capabilities CAPABILITY_NAMED_IAM \
             --region ${{env.REGION}}
 
-    - name: 🏗️ Setup cloudformation deployment for ${{ env.STACK_NAME_CLOUDYSITE }}
+    - name: 🏗️ Setup cloudformation deployment for Website
       run: |
         aws cloudformation deploy \
             --stack-name ${{env.STACK_NAME_CLOUDYSITE}} \

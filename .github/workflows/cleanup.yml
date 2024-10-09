@@ -1,0 +1,37 @@
+name: 🛠️CloudFormation Infrastructure Cleanup
+
+on:
+  workflow_dispatch:
+
+env:
+  REGION: 'us-east-1'
+  STACK_NAME_VPC: "cloudysite"
+  STACK_NAME_CLOUDYSITE: "cloudysite-server"
+
+jobs:
+  cloudformation:
+    name: 🛠️ Cloudformation
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Get code # get code from repository to server
+      uses: actions/checkout@v4 # action to use - https://github.com/actions/checkout
+
+    - name: 🔑AWS credentials configuration
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.REGION }}
+
+    - name: 🏗️ Cleanup Website infrastructure
+      run: |
+        aws cloudformation delete-stack \
+        --stack-name ${{env.STACK_NAME_CLOUDYSITE}} \
+        --region ${{env.REGION}}
+
+    - name: 🏗️ Cleanup Networking infrastructure
+      run: |
+        aws cloudformation delete-stack \
+            --stack-name ${{env.STACK_NAME_VPC}} \
+            --region ${{env.REGION}}
