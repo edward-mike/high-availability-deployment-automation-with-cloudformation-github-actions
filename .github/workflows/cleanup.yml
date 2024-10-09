@@ -29,9 +29,25 @@ jobs:
         aws cloudformation delete-stack \
         --stack-name ${{env.STACK_NAME_CLOUDYSITE}} \
         --region ${{env.REGION}}
+        echo "Initiated deletion of ${{ env.STACK_NAME_CLOUDYSITE }}."
+
+    - name: 🕐 Wait for Website infrastructure deletion to complete
+      run: |
+        aws cloudformation wait stack-delete-complete \
+        --stack-name ${{ env.STACK_NAME_CLOUDYSITE }} \
+        --region ${{ env.REGION }}
+        echo "Deletion of ${{ env.STACK_NAME_CLOUDYSITE }} completed."
 
     - name: 🏗️ Cleanup Networking infrastructure
       run: |
         aws cloudformation delete-stack \
             --stack-name ${{env.STACK_NAME_VPC}} \
             --region ${{env.REGION}}
+            echo "Initiated deletion of ${{ env.STACK_NAME_VPC }}."
+
+    - name: 🕐 Wait for Networking infrastructure deletion to complete
+      run: |
+        aws cloudformation wait stack-delete-complete \
+        --stack-name ${{ env.STACK_NAME_VPC }} \
+        --region ${{ env.REGION }}
+        echo "Deletion of ${{ env.STACK_NAME_VPC }} completed."

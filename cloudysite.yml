@@ -41,7 +41,6 @@ Resources:
         CidrIp: 0.0.0.0/0 # Allows outbound traffic to any IP
 
 
-
   # Configuring a Launch Template
   WebAppLaunchTemplate:
     Type: AWS::EC2::LaunchTemplate
@@ -61,10 +60,10 @@ Resources:
             cat <<EOF > index.html
             <!DOCTYPE html>
             <head>
-              <title>Udagram is Launched on a Server!</title>
+              <title>CloudySite is Launched on a Server!</title>
             </head>
             <body>
-            <h1>It works! Udagram, Udagram</h1>
+            <h1>It Works!</h1>
             <p>This website is hosted on Nginx.</p>
             </body>
             </html>
