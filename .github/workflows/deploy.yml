@@ -3,6 +3,7 @@ name: 🛠️CloudFormation Deployment
 on:
   push:
     branches: [master, main]
+  workflow_dispatch:
 
 env:
   REGION: 'us-east-1'
