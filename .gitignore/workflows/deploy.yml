@@ -1,0 +1,32 @@
+name: 🛠️CloudFormation Deployment
+
+on:
+  push:
+    branches: [master, main]
+
+env:
+  REGION: 'us-east-1'
+
+jobs:
+  cloudformation:
+    name: 🛠️ Cloudformation
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Get code # get code from repository to server
+      uses: actions/checkout@v4 # action to use - https://github.com/actions/checkout
+
+    - name: 🔑AWS credentials configuration
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.REGION }}
+
+    - name: 🏗️ Setup cloudformation deployment
+      uses: aws-actions/aws-cloudformation-github-deploy@v1
+      with:
+        stack-name: MyStack
+        template: network.yml
+        parameter-overrides: network-parameters.json
+        region-name: ${{ env.REGION }}

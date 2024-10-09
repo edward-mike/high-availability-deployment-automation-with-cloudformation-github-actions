@@ -1,0 +1,10 @@
+[
+    {
+        "ParameterKey": "EnvironmentName",
+        "ParameterValue": "CloudySite"
+    },
+    {
+        "ParameterKey": "BucketName",
+        "ParameterValue": "cloudysite-s3-xabx123r"
+    }
+]
