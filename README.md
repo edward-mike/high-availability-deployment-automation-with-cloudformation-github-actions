@@ -4,7 +4,7 @@
 ## Objective
 The goal of this project was to deploy a high-availability web application using AWS CloudFormation to ensure scalability and reliability. The infrastructure was designed to handle increased traffic and provide continuous service by incorporating key components such as a VPC, subnets, Auto Scaling Groups, a Load Balancer, and an S3 bucket for static content.
 
-This project involved creating a detailed infrastructure diagram, configuring network and server resources, and setting up security groups. Additionally, I implemented GitHub Actions for continuous integration and deployment, streamlining the process of managing infrastructure changes. The entire deployment and teardown process was automated using CloudFormation templates and Bash scripts.
+This project involved creating a detailed infrastructure diagram, configuring network and server resources, and setting up security groups. Additionally, I implemented GitHub Actions for continuous deployment, streamlining the process of managing infrastructure changes. The entire deployment and teardown process was automated using CloudFormation templates and Bash scripts.
 
 As a result, I achieved a robust, scalable, and easily manageable web application environment with 99.9% uptime and enhanced performance.
 
