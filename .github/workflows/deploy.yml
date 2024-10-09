@@ -25,9 +25,10 @@ jobs:
         aws-region: ${{ env.REGION }}
 
     - name: 🏗️ Setup cloudformation deployment
-      uses: aws-actions/aws-cloudformation-github-deploy@v1
-      with:
-        name: MyStack
-        template: network.yml
-        parameter-overrides: network-parameters.json
-        capabilities: CAPABILITY_NAMED_IAM
+      run: |
+        aws cloudformation deploy \
+        --stack-name $STACK_NAME_VPC \
+        --template-file network.yml \
+        --parameter-overrides file://network-parameters.json \
+        --capabilities CAPABILITY_NAMED_IAM \
+        --region $REGION
