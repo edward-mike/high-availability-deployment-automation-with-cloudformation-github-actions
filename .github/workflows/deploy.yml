@@ -7,6 +7,8 @@ on:
 
 env:
   REGION: 'us-east-1'
+  STACK_NAME_VPC: "cloudysite"
+  STACK_NAME_CLOUDYSITE: "cloudysite-server"
 
 jobs:
   cloudformation:
@@ -24,7 +26,20 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.REGION }}
 
-    - name: 🏗️ Setup cloudformation deployment
+    - name: 🏗️ Setup cloudformation deployment for {{ env.STACK_NAME_VPC }}
       run: |
-        echo "running deployment script ..."
-        ./run.sh deploy
+        aws cloudformation deploy \
+            --stack-name ${{env.STACK_NAME_VPC}} \
+            --template-file network.yml \
+            --parameter-overrides file://network-parameters.json \
+            --capabilities CAPABILITY_NAMED_IAM \
+            --region ${{env.REGION}}
+
+    - name: 🏗️ Setup cloudformation deployment for ${{ env.STACK_NAME_CLOUDYSITE }}
+      run: |
+        aws cloudformation deploy \
+            --stack-name ${{env.STACK_NAME_CLOUDYSITE}} \
+            --template-file cloudysite.yml \
+            --parameter-overrides file://cloudysite-parameters.json \
+            --capabilities CAPABILITY_NAMED_IAM \
+            --region ${{env.REGION}}
