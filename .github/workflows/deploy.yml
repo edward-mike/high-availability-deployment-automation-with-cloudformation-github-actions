@@ -27,8 +27,8 @@ jobs:
     - name: 🏗️ Setup cloudformation deployment
       run: |
         aws cloudformation deploy \
-        --stack-name $STACK_NAME_VPC \
+        --stack-name my-stack-name \
         --template-file network.yml \
         --parameter-overrides file://network-parameters.json \
         --capabilities CAPABILITY_NAMED_IAM \
-        --region $REGION
+        --region us-east-1
