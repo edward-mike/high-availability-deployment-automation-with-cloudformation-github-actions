@@ -27,7 +27,7 @@ jobs:
     - name: 🏗️ Setup cloudformation deployment
       uses: aws-actions/aws-cloudformation-github-deploy@v1
       with:
-        stack-name: MyStack
+        name: MyStack
         template: network.yml
         parameter-overrides: network-parameters.json
-        region-name: ${{ env.REGION }}
+        capabilities: CAPABILITY_NAMED_IAM
